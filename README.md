@@ -112,7 +112,7 @@ User
 
 ### 7. Domain registrar — Namecheap
 
-- Switched the registrar's nameservers from Namecheap BasicDNS to Custom DNS, set to the Cloudflare-assigned pair (`aleena.ns.cloudflare.com`, `seamus.ns.cloudflare.com`) so DNS resolution flows through Cloudflare.
+- Switched the registrar from Namecheap BasicDNS to Custom DNS, set to the Cloudflare-assigned nameserver pair so DNS resolution flows through Cloudflare.
 
 ---
 
