@@ -1,12 +1,12 @@
 # Travel Memory
 
-A full-stack MERN travel journal application, forked from [UnpredictablePrashant/TravelMemory](https://github.com/UnpredictablePrashant/TravelMemory) and deployed on AWS as part of a deployment assignment.
+A full-stack MERN travel journal application. This fork extends the original [UnpredictablePrashant/TravelMemory](https://github.com/UnpredictablePrashant/TravelMemory) with a production-style AWS deployment.
 
 ---
 
 ## Deployment
 
-This fork was deployed across two AWS EC2 instances behind an Application Load Balancer, with MongoDB Atlas as the database layer and Cloudflare DNS for the custom domain.
+The application runs across two AWS EC2 instances behind an Application Load Balancer, with MongoDB Atlas as the database layer and Cloudflare DNS for the custom domain.
 
 ### Architecture
 
@@ -25,7 +25,7 @@ User
 
                                     │
                                     ▼
-                       MongoDB Atlas (M0 free, ap-south-1)
+                       MongoDB Atlas (M0, ap-south-1)
 ```
 
 ### Stack
@@ -34,7 +34,7 @@ User
 | ---------------- | -------------------------------------- |
 | Frontend         | React (Create React App), built static |
 | Backend          | Node.js, Express                       |
-| Database         | MongoDB Atlas (M0 free tier)           |
+| Database         | MongoDB Atlas                          |
 | Process manager  | PM2                                    |
 | Web server       | Nginx (reverse proxy + static serving) |
 | Compute          | AWS EC2 (t2.micro, Ubuntu 24.04)       |
@@ -52,16 +52,16 @@ User
 
 ### Documentation
 
-A full step-by-step deployment guide with screenshots and the architecture diagram is submitted alongside this repository as `TravelMemory-Deployment-Guide.pdf`. It covers MongoDB Atlas setup, EC2 provisioning, security group configuration, SSH/PM2/Nginx setup, frontend build, second-instance setup, load balancer creation, target group registration, and Cloudflare DNS + Namecheap nameserver configuration.
+A full step-by-step deployment guide with screenshots and the architecture diagram is available as `TravelMemory-Deployment-Guide.pdf`. It covers MongoDB Atlas setup, EC2 provisioning, security group configuration, SSH/PM2/Nginx setup, frontend build, second-instance setup, load balancer creation, target group registration, and Cloudflare DNS + Namecheap nameserver configuration.
 
-### Changes made in this fork
+### Notable changes in this fork
 
-- Added a `Deployment` section to this README documenting the AWS architecture and stack.
-- Frontend `src/url.js` configured on each EC2 instance to point at the deployed backend URL during the build step.
-- Backend `.env` populated with the MongoDB Atlas connection string and `PORT=3000` on each EC2 instance (kept out of version control).
-- Nginx configured as a reverse proxy from port 80 to the Node backend on port 3000, plus a separate server block to serve the React static build on port 3001.
-- PM2 used to keep the Node backend running and restart on crash; both EC2 instances run the same backend behind the load balancer.
-- Cloudflare DNS records (A and CNAME) point the custom domain at the EC2 frontend and the load balancer respectively.
+- Documented the AWS architecture and stack in this README.
+- Configured the frontend `src/url.js` to point at the deployed backend at build time on each EC2 instance.
+- Set up backend environment variables (`MONGO_URI`, `PORT=3000`) on each EC2 instance, kept out of version control.
+- Configured Nginx as a reverse proxy from port 80 to the Node backend on port 3000, and a separate server block to serve the React static build on port 3001.
+- Used PM2 to run the Node backend as a managed process with crash-restart on both instances behind the load balancer.
+- Set up Cloudflare DNS records (A and CNAME) to point the custom domain at the EC2 frontend and the load balancer respectively.
 
 ---
 
@@ -120,4 +120,4 @@ npm start
 
 ---
 
-Forked and deployed by [@2sagarrathore](https://github.com/2sagarrathore) — May 2026.
+Maintained by [@2sagarrathore](https://github.com/2sagarrathore).
